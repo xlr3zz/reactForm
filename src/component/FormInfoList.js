@@ -17,10 +17,10 @@ class FormInfoList extends Component {
             textAlign : 'center'
         }
 
-        const { data } = this.props;
+        const { data , onUpdate } = this.props;
         
         const userList = data.map(
-            userInfo => (<FormInfo userData={userInfo} key={userInfo.id} />)
+            userInfo => (<FormInfo userData={userInfo} key={userInfo.id} onUpdate={onUpdate} />)
         )
 
         return (

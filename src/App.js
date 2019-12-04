@@ -5,14 +5,15 @@ import FormInfoList from './component/FormInfoList';
 
 class App extends Component {
 
-  id = 0;
+  id = 1;
 
   state = {
       dataList : [
         {
           name : '문동현',
           email : 'dhmoon@abc.com',
-          phone : '010-7457-3088'
+          phone : '010-7457-3088',
+          id    : 0
         }
       ]
   }
@@ -27,11 +28,31 @@ class App extends Component {
       })
   }
 
+  formUpate = (id,modifyData) => {
+      const { dataList } = this.state;
+      this.setState({
+          dataList : dataList.map(
+              userData => {
+                  if(userData.id === id) {
+                      return {
+                          id,
+                          ...modifyData
+                      }
+                  }
+                  return userData;
+              }
+          )
+      })
+  }
+
   render() {
     return (
       <div>
           <Form onSaveMember={this.saveHandler} />
-          <FormInfoList data={this.state.dataList} />
+          <FormInfoList 
+            data={this.state.dataList} 
+            onUpdate={this.formUpate}  
+          />
       </div>
     );
   }
